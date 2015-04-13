@@ -1,3 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
+MD5
+src/*.o
+src/*.so
