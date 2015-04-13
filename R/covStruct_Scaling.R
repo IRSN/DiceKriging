@@ -2,14 +2,14 @@
 ## Scaling class
 ## --------------
 
-setClass("covScaling",   
+setClass("covScaling",
          representation(
            d = "integer",           ## (spatial) dimension
            knots = "list",          ## a named list containing the knots
            eta = "list",            ## a list containing the values at knots
            ##knots.n = "integer",   ## number of knots for each dimension
            name = "character",      ## "gauss"
-           paramset.n = "integer",  ## number of parameters sets 
+           paramset.n = "integer",  ## number of parameters sets
            ##   gauss, exp : 1;  powexp : 2
            var.names = "character", ## e.g.  c("Lat", "Long") length d
            ## s.d. of the non-nugget part of error
@@ -23,16 +23,16 @@ setClass("covScaling",
            param.n = "integer"            ## length of knots
          ),
          validity = function(object) {
-           
+
            covset <- c("gauss", "exp", "matern3_2", "matern5_2")
            if (!is.element(object@name, covset)) {
              cat("The list of available covariance functions is:\n", covset, "\n")
              return("invalid character string for 'covtype' argument")
            }
-           
+
            names.knots <- names(object@knots)
            n.knots <- length(object@knots)
-           
+
            if (n.knots>0) {
              if (length(names.knots) == 0) {
                return("the list containing the knots must be named")
@@ -56,14 +56,14 @@ setClass("covScaling",
                  return("knots must be of length >=2")
                }
              }
-             
+
              n.eta <- length(object@eta)
              if (n.eta>0) {
                if (n.eta != n.knots) {
                  return("the number of values at knots is different from the number of knots")
                } else if (!all(sapply(object@eta, is.numeric))) {
                  return("the values at knots must be numeric")
-               } 
+               }
                for (i in 1:n.eta) {
                  eta.i <- object@eta[[i]]
                  if (any(eta.i <= 0.0)) {
@@ -72,13 +72,13 @@ setClass("covScaling",
                }
              }
            }
-           
+
            if (!identical(object@sd2, numeric(0))) {
              if (object@sd2 < 0) {
                return("The model variance should be non negative")
              }
            }
-           
+
            if (length(object@nugget) > 1) {
              return("'nugget' must be a single non-negative number. For heteroskedastic noisy observations, use 'noise.var' instead.")
            }
@@ -87,7 +87,7 @@ setClass("covScaling",
                return("The nugget effect should be non negative")
              }
            }
-           TRUE 
+           TRUE
          }
 )
 
@@ -95,8 +95,8 @@ setClass("covScaling",
 ## METHOD covMatrix
 ## -----------------
 
-setMethod("covMatrix", 
-          signature = "covScaling", 
+setMethod("covMatrix",
+          signature = "covScaling",
           definition = function(object, X, noise.var=NULL) {
             covMatrix(extract.covIso(object), X=scalingFun(X, knots=object@knots, eta=object@eta), noise.var=noise.var)
           }
@@ -106,8 +106,8 @@ setMethod("covMatrix",
 ## Useful METHOD for prediction: covMat1Mat2
 ## -----------------------------------------
 
-setMethod("covMat1Mat2", 
-          signature = "covScaling", 
+setMethod("covMat1Mat2",
+          signature = "covScaling",
           definition = function(object, X1, X2, nugget.flag=FALSE) {
             covMat1Mat2(extract.covIso(object), X1=scalingFun(X1, knots=object@knots, eta=object@eta), X2=scalingFun(X2, knots=object@knots, eta=object@eta), nugget.flag=nugget.flag)
           }
@@ -115,23 +115,23 @@ setMethod("covMat1Mat2",
 
 
 # ------------------------------
-# Useful METHODS for estimation 
+# Useful METHODS for estimation
 # * covparam2vect
 # * vect2covparam
 # * covParametersBounds
 # * covMatrixDerivative
 # ------------------------------
 
-setMethod("covparam2vect", 
-          signature = "covScaling", 
+setMethod("covparam2vect",
+          signature = "covScaling",
           definition = function(object){
             param <- unlist(object@eta)
             return(as.numeric(param))
           }
 )
 
-setMethod("vect2covparam", 
-          signature = "covScaling", 
+setMethod("vect2covparam",
+          signature = "covScaling",
           definition = function(object, param){
             if (length(param)>0) {
               knots.n <- sapply(object@knots, length)
@@ -143,8 +143,8 @@ setMethod("vect2covparam",
           }
 )
 
-setMethod("coef", 
-          signature = signature(object = "covScaling"), 
+setMethod("coef",
+          signature = signature(object = "covScaling"),
           definition = function(object, type = "all", as.list = TRUE){
             val <-
               switch(type,
@@ -165,8 +165,8 @@ setMethod("coef",
 )
 
 
-setMethod("covParametersBounds", 
-          signature = "covScaling", 
+setMethod("covParametersBounds",
+          signature = "covScaling",
           definition = function(object, X){
             knots.n <- sapply(object@knots, length)
             object.tp <- as(extract.covIso(object), "covTensorProduct")
@@ -177,7 +177,7 @@ setMethod("covParametersBounds",
 )
 
 setMethod("paramSample",
-          signature = "covScaling", 
+          signature = "covScaling",
           definition = function(object, n, lower, upper, y=NULL, type="all-sd2-nugget"){
             param.n <- object@param.n
             matrixinit <- matrix(runif(n*param.n), nrow = param.n, ncol = n)
@@ -190,8 +190,8 @@ setMethod("paramSample",
 
 envir.covScaling <- new.env()
 
-setMethod("covMatrixDerivative", 
-          signature = "covScaling", 
+setMethod("covMatrixDerivative",
+          signature = "covScaling",
           definition = function(object, X, C0, k, envir=envir.covScaling) {
             # NOTE : this function MUST be used in a loop over the index k, from 1 to k.max
             if ((k>=1) & (k<=object@param.n)) {
@@ -208,12 +208,12 @@ setMethod("covMatrixDerivative",
               }
               k <- k.vec[i]
               l <- l.vec[i]
-              
+
               if (l==1) {
                 object.covTensorProduct <- as(extract.covIso(object), "covTensorProduct")
                 fX <- scalingFun(X, knots=object@knots, eta=object@eta)
-                Dk <- covMatrixDerivative.dx.covTensorProduct(object=object.covTensorProduct, 
-                                                              X=fX, C0=C0, k=k)   
+                Dk <- covMatrixDerivative.dx.covTensorProduct(object=object.covTensorProduct,
+                                                              X=fX, C0=C0, k=k)
                 envir$Dk <- Dk
               } else {
                 Dk <- envir$Dk
@@ -230,7 +230,7 @@ setMethod("covMatrixDerivative",
           }
 )
 
-setMethod("covVector.dx", "covScaling", 
+setMethod("covVector.dx", "covScaling",
           function(object, x, X, c) {
               gradfx = array(NaN,length(x))
               for (i in 1:length(x)) {
@@ -253,43 +253,43 @@ setMethod("covVector.dx", "covScaling",
 ## METHOD show
 ## ------------
 
-setMethod("show", 
-          signature = "covScaling", 
+setMethod("show",
+          signature = "covScaling",
           definition = function(object){
-            
+
             cat("\n")
             cat("Covar. type  :", object@name, ", with scaling \n")
-            
+
             cat("Covar. coeff.")
             if (!identical(object@known.covparam, "All")) cat(", with estimated values for eta")
             cat(":\n")
-            
+
             for (i in 1:object@d) {
               knots.names <- paste("knots", "(", object@var.names[i], ")", sep = "")
               eta.names <- paste("eta", "(", object@var.names[i], ")", sep = "")
               param.names <- c(eta.names, knots.names)
               param.names <- formatC(param.names, width = 12)
-              tab <- t(formatC(cbind(object@eta[[i]], object@knots[[i]]), width = 10, digits = 4, format = "f", flag = " "))
-              n.i <- length(object@knots[[i]])
+              tab <- t(formatC(cbind(object@eta[[object@var.names[i]]], object@knots[[object@var.names[i]]]), width = 10, digits = 4, format = "f", flag = " "))
+              n.i <- length(object@knots[[object@var.names[i]]])
               dimnames(tab) <- list(param.names, rep("", n.i))
               print(tab, quote=FALSE)
             }
-            
-            
+
+
             cat("\n")
-            
+
             if (identical(object@known.covparam, "All")) {
               cat("Variance:", object@sd2)
-            } else {	         
+            } else {
               cat("Variance estimate:", object@sd2)
             }
             cat("\n")
-            
+
             if (object@nugget.flag) {
               if (object@nugget.estim) {
                 cat("\nNugget effect estimate:", object@nugget)
               } else cat("\nNugget effect :", object@nugget)
-              cat("\n\n")  
+              cat("\n\n")
             }
           }
 )
