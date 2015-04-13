@@ -230,6 +230,25 @@ setMethod("covMatrixDerivative",
           }
 )
 
+setMethod("covVector.dx", "covScaling", 
+          function(object, x, X, c) {
+              gradfx = array(NaN,length(x))
+              for (i in 1:length(x)) {
+                require(numDeriv)
+                gradfx[i] = grad(function(xx) scalingFun(matrix(xx,nrow=1), knots=object@knots, eta=object@eta)[i],x[i])
+              }
+              object.covTensorProduct <- as(extract.covIso(object), "covTensorProduct")
+              fx <- scalingFun(matrix(x,nrow=1), knots=object@knots, eta=object@eta)
+              fX <- scalingFun(X, knots=object@knots, eta=object@eta)
+              dk.dx = covVector.dx.covTensorProduct(object=as(object.covTensorProduct, "covTensorProduct"), x=fx, X=fX, c=c)
+              #(g o f)' = f' * (g' o f)
+              for (i in 1:length(x)) {
+                dk.dx[,i] = gradfx[i] * dk.dx[,i]
+              }
+              return(dk.dx)
+          }
+          )
+
 ## ------------
 ## METHOD show
 ## ------------

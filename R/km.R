@@ -215,7 +215,7 @@ function(formula = ~1, design, response, covtype = "matern5_2",
     for (i in 1L:nval) {
       u[i] <- cv(lambda.val[i], object = model, f)
     }
-    plot(lambda.val, u)
+    #plot(lambda.val, u)
     lambda <- lambda.val[which.min(u)]
     model@penalty$value <- lambda
     model <- f(model, envir = envir.logLik)

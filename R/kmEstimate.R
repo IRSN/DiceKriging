@@ -180,6 +180,7 @@ function(model, envir) {
     
     forced <- list(fn=fn, nvars=length(parinit), max=(fnscale < 0), starting.values=parinit, 
             Domains=cbind(lower, upper), gr=gr, gradient.check=FALSE, boundary.enforcement=2, 
+            unif.seed=runif(1)*(2^32), int.seed=runif(1)*(2^32), # needed to allow control of random seed. set.seed() should be used, possible because do not use cluster=TRUE.
             hessian=TRUE, optim.method="L-BFGS-B", model=model, envir=envir)
        
     genoudArgs[names(forced)] <- forced
@@ -187,6 +188,12 @@ function(model, envir) {
        
     o <- do.call(rgenoud::genoud, genoudArgs)   
     	
+    } 
+
+    if (is.function(optim.method) {
+      o <- optim.method(par=parinit, fn=fn, gr=gr,
+                 lower = lower, upper = upper,
+                 control = control, model=model, envir=envir)
 	}
    
   model@logLik <- as.numeric(o$value)
