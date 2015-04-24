@@ -129,7 +129,7 @@ function(model, envir) {
                 control = controlChecked, hessian = FALSE, model, envir=envir)
       })
       }
-    
+      
       # get the best result
       bestValue <- Inf
       bestIndex <- NA
@@ -150,12 +150,14 @@ function(model, envir) {
       model@control$convergence <- o$convergence
       
       # we need to initiate a final optimization from the best point
-      # in order to have the correct intermediate variables stored in environnement 'envir'
+      # in order to recompute the intermediate variables to be stored in environment 'envir'
+      # (during the 'foreach' loop, they were stored in a copy of 'envir')
+      
       controlChecked$maxit <- 0
       controlChecked$trace <- 0
       o <- optim(par = o$par, fn = fn, gr = gr,
-                 method = "L-BFGS-B", lower = lower, upper = upper,
-                 control = controlChecked, hessian = FALSE, model, envir=envir)
+                method = "L-BFGS-B", lower = lower, upper = upper,
+                control = controlChecked, hessian = FALSE, model, envir=envir)
     
       if (control$trace!=0){
         cat("\n")

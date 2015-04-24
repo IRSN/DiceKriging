@@ -1,9 +1,9 @@
-3fc4ddd055e09afbd6cdec446a588622 *CHANGELOG
-67d37ffacf90c630ede8a4352ababe24 *DESCRIPTION
-9ea1d07490f2bae45d34c9d8687bf5db *NAMESPACE
+f8c07f128f73c47c99f65aa37d067950 *CHANGELOG
+8f13ee60456f9cb9181da2134336f057 *DESCRIPTION
+e537b86b52c597840a8a92a90f1acd36 *NAMESPACE
 1e766139f208466b094fabdbc100300d *R/SCAD.R
 a890d82e5994119676c75cae73fcbcd9 *R/SCAD.derivative.R
-2a2b0b2b605e3838427f445d5896e3d5 *R/allGenerics.R
+19cf2e97269e962420fddf687fa7486a *R/allGenerics.R
 a4386c85125a48e383538e63952a23c6 *R/branin.R
 5af0af5ec06966f97b30eb9ea3692ead *R/camelback.R
 11a4cc1917e8e18e56b4b1f5c6bc244f *R/checkNames.R
@@ -11,11 +11,11 @@ a4386c85125a48e383538e63952a23c6 *R/branin.R
 57ad381567a19f4717fa1d5e7a38136d *R/computeAuxVariables_noChol.R
 428e9b9aa527333ea6e59c1b3b35592e *R/covMyKernel.R
 d367da06638cb55a1a582f96eb1cbc03 *R/covStruct.create.R
-636eb4c479068a0df05e986bbbfb4fe2 *R/covStruct_Base_TensorProduct.R
+a7dbd50707d51584c44be1c9c05fbef0 *R/covStruct_Base_TensorProduct.R
 3ca57fe72dd84bb3702c40e8136547ad *R/covStruct_Iso.R
 f8a2a045f524b02f967f76ac945055bd *R/covStruct_Scaling.R
 c60550e0c1dcb5427d0cb83b4bce5e8b *R/covStruct_Scaling_Affine.R
-bf6f98dba60370c91460e4fe0ff29351 *R/covStruct_User.R
+aa4df4b6cf7f8a4bcf76918a6f2b9e4f *R/covStruct_User.R
 b2761182b577efd275036f8def2599fd *R/covStruct_XtraClass_Union.R
 0fcd06bbb1392dabce96f119e83015d4 *R/covStruct_XtraMethods.R
 d592fab1b499fe8ae8a6652b2bf6450e *R/diagABA.R
@@ -26,7 +26,7 @@ d592fab1b499fe8ae8a6652b2bf6450e *R/diagABA.R
 cb4d9279e837da9f4ede40b2c7d33e2f *R/km.R
 9b9844868b5449b43fbee53f6801318f *R/km1Nugget.init.R
 f6e981b2220fcc27ed4805d594831e96 *R/kmData.R
-bbcd5b50aa82479b3db3380b22bb1a12 *R/kmEstimate.R
+97d92156d4c2cc427c8a8685994c728f *R/kmEstimate.R
 57ea3f527b7bd9eff73483d7b7990f9f *R/kmNoNugget.init.R
 4a0d21b26f0656a6c4394d7de85adae7 *R/kmNuggets.init.R
 b4a4f18b0bc6974f81a53bf2b436db85 *R/kmStruct.R
@@ -35,8 +35,8 @@ bc8d9d0c165176e85f24a875aec9cf8e *R/leaveOneOutFun.R
 41df7648ce2ed20c697fffcc28f4aeb6 *R/leaveOneOutGrad.R
 e9725181b4f02b31cc6dd6039ebebbf4 *R/logLik.km.R
 ba3e53fed9727f6e9cda49c6dacf57bc *R/logLikFun.R
-13f3898caeba80289887fd978784d1df *R/logLikGrad.R
-f426260380d41d80ac2aa32559e1c135 *R/scalingFun.R
+5bc569b8316de8348e926083177ea596 *R/logLikGrad.R
+261bc8adb118fc032c52d41e36039a69 *R/scalingFun.R
 10850ac7fd11d460efbb154392c00b97 *R/scalingGrad.R
 94831d36a285c95ac88aeaf4d9147455 *R/show.km.R
 902dae3f206b3def65fb1d5f9fa6352e *R/trend.deltax.R
@@ -47,7 +47,7 @@ a3eb846124d8bc6c4fccc9795fa29c5a *inst/tests/test-checkNames.R
 4e1f46f7c73d8e3a4c269d963dadfafd *inst/tests/test-interp.R
 034d3dcb5b42675fed5ce5400959d5d3 *inst/tests/test-loo.R
 0a69932e1f1930000ef53dd2a113c153 *inst/tests/test-trend.deltax.R
-7b5e6b5e53e7e60c7b5da5597735cfdb *man/DiceKriging-package.Rd
+329f1c385002930aa7dd2f360b846d0a *man/DiceKriging-package.Rd
 8bad82f20ecfed476fef176c65df13e3 *man/SCAD.Rd
 22a4f2e03663d5f1cc699f1e73775d05 *man/SCAD.derivative.Rd
 828e3eac3e052f024f3a65440b2795c4 *man/affineScalingFun.Rd
@@ -55,7 +55,7 @@ bd7a9f11919cfce47f5ffc49d3e93898 *man/affineScalingGrad.Rd
 3a6f50f113cc7cb2361b4ef9b6facefb *man/branin.Rd
 dbdf7a65782d425d006f095d37b10ccf *man/camelback.Rd
 8022342a3de51f9f1ec8d6f940b59be6 *man/checkNames.Rd
-d2fce3e9d24179525f04420232f4e228 *man/coef.Rd
+18992a2f03dcde5244b1bfaec69fe95d *man/coef.Rd
 1f4852b9de8972a4ccd6983939d7de95 *man/computeAuxVariables.Rd
 6c8137d9482f9a90e400642d68768101 *man/covAffineScaling-class.Rd
 02167c34998b81cc587c3292c9182fac *man/covIso-class.Rd
@@ -66,7 +66,7 @@ d2fce3e9d24179525f04420232f4e228 *man/coef.Rd
 59ec00a766bc315bc5d278e58993fcb7 *man/covParametersBounds.Rd
 ef2526830aaa6edaedb4e2b55698aeae *man/covScaling-class.Rd
 819ae6720cea47f8ea52e291648d81a2 *man/covStruct.create.Rd
-c0a660a12f0f9efb461e6b453d3f48fc *man/covTensorProduct-class.Rd
+a41e9e01eb1a6675b9c63494be3673a2 *man/covTensorProduct-class.Rd
 96d3dabbe79e313132e215d968a451c6 *man/covUser-class.Rd
 25f4196de463fe6e82da984eb74a3a30 *man/covVector.dx.Rd
 77038079e3d665c9866f44dc54d32996 *man/covparam2vect.Rd

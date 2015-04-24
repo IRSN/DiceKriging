@@ -3,6 +3,7 @@ useDynLib(DiceKriging)
 import(methods)
 importFrom("graphics", plot)
 importFrom("stats", predict)
+importFrom("stats", logLik)
 importFrom("stats", coef)
 importFrom("stats", coefficients)
 importFrom("stats", simulate)
@@ -12,7 +13,14 @@ importFrom("stats", update)
 exportClasses(covTensorProduct, covIso, covScaling, covKernel, km, covAffineScaling, covUser)
 ## All methods, for own or "foreign" generics:
 exportMethods(show, plot, predict, simulate, update, covMatrix, covMat1Mat2, 
-covMatrixDerivative, covVector.dx, covParametersBounds, covparam2vect, vect2covparam, coef, "coef<-", summary, inputnames, ninput, kernelname, nuggetvalue, "nuggetvalue<-", nuggetflag)
+covMatrixDerivative, covVector.dx, covParametersBounds, covparam2vect, vect2covparam, coef, summary, inputnames, ninput, kernelname, nuggetvalue, "nuggetvalue<-", nuggetflag)
+
+## S3
+S3method(logLik, km)
+S3method(plot, km)
+S3method(predict, km)
+
+
 
 export(branin, 
        camelback, 

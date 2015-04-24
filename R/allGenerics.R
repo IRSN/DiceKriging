@@ -30,11 +30,12 @@ if(!isGeneric("coef")) {
   )
 }
 
-if(!isGeneric("coef<-")) {
-  setGeneric("coef<-",
-           function(object, ..., value) standardGeneric("coef<-")
-  )
-}
+# POUR EVITER LES CONFLITS AVEC gplab
+# if(!isGeneric("coef<-")) {
+#   setGeneric("coef<-",
+#            function(object, ..., value) standardGeneric("coef<-")
+#   )
+# }
 
 if(!isGeneric("covParametersBounds")) {
   setGeneric(name    = "covParametersBounds",

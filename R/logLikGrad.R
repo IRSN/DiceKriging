@@ -57,7 +57,8 @@ function(param, model, envir) {
 		Cinv <- chol2inv(T)			# Invert R from given T
 
     for (k in 1:(nparam)) {
-			gradC.k <- covMatrixDerivative(model@covariance, X = model@X, C0 = C - diag(vn), k = k)
+			gradC.k <- covMatrixDerivative(model@covariance, X = model@X, 
+                                     C0 = C - diag(vn, nrow = nrow(C)), k = k)
 			term1 <- -t(x)%*%gradC.k%*%x
 			term2 <- sum(Cinv*gradC.k)			# economic computation of trace(Cinv%*%gradC.k)
 			logLik.derivative[k] <- -0.5*(term1 + term2) #/sigma2

@@ -77,6 +77,8 @@ scalingFun <- function(X, knots, eta, plot = FALSE) {
   
   for (i in 1:d){
     transX[ , i] <- scalingFun1d(x = X[ , i], knots = knots[[i]], eta = eta[[i]])
+    #possible bug to correct: transX[ , i] <- scalingFun1d(x = X[ , i], 
+    # knots = knots[[colnames(X)[i]]], eta = eta[[colnames(X)[i]]]) 
   }
 
   if (plot) {

@@ -40,10 +40,10 @@ covMatrixcovUser <- function(object, X, noise.var=NULL) {
   
   if (object@nugget.flag) {
     vn <- rep(object@nugget, n)
-    C <- C + diag(vn)
+    C <- C + diag(vn, nrow = n)
   } else if (length(noise.var)>0) {
     vn <- noise.var
-    C <- C + diag(noise.var)
+    C <- C + diag(noise.var, nrow = n)
   } else {
     vn <- rep(0, n)
   }

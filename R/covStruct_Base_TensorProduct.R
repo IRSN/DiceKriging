@@ -100,10 +100,10 @@ covMatrix.covTensorProduct <- function(object, X, noise.var=NULL) {
   
   if (object@nugget.flag) {
     vn <- rep(object@nugget, n)
-    C <- C + diag(vn)
+    C <- C + diag(vn, nrow = n)
   } else if (length(noise.var)>0) {
     vn <- noise.var
-    C <- C + diag(noise.var)
+    C <- C + diag(noise.var, nrow = n)
   } else {
     vn <- rep(0, n)
   }
@@ -231,69 +231,70 @@ setMethod("coef",
           }
 )
 
-setReplaceMethod("coef",
-          signature = signature(object = "covTensorProduct", value = "numeric"),
-          definition = function(object, type = "all", checkValidity = TRUE,
-                                ..., value) {
-            
-            ## not done during optims
-            if (checkValidity) {
-              expLength <- switch(type, 
-                                  "all" = object@param.n + 1L + as.integer(object@nugget.flag),
-                                  "all-nugget" = object@param.n + 1L,
-                                  "all-sd2-nugget"= object@param.n,
-                                  "range" = object@range.n, 
-                                  "shape" = object@shape.n, 
-                                  "sd2" = 1L,
-                                  "nugget" = 1L)
-              if (length(value) != expLength ) {
-                stop("'value' must have length ", expLength)
-              }
-            } 
-            if (type == "all") {
-              End <- 0L
-              object@range.val <- value[End + 1L:object@range.n]
-              End <- End + object@range.n
-              if (length(object@shape.n) && object@shape.n > 0L) {
-                object@range.val <- value[End + 1L:object@shape.n]
-                End <- End + object@shape.n
-              }
-              object@sd2 <- value[End + 1L]
-              End <- End + 1L
-              if (object@nugget.flag) {
-                object@nugget.val <- value[End + 1L]
-              }
-            } else if (type == "all-nugget") {
-              End <- 0L
-              object@range.val <- value[End + 1L:object@range.n]
-              End <- End + object@range.n
-              if (length(object@shape.n) && object@shape.n > 0L) {
-                object@range.val <- value[End + 1L:object@shape.n]
-                End <- End + object@shape.n
-              }
-              object@sd2 <- value[End + 1L]
-            } else if (type == "all-sd2-nugget") {
-              End <- 0L
-              object@range.val <- value[End + 1L:object@range.n]
-              End <- End + object@range.n
-              if (length(object@shape.n) && object@shape.n > 0L) {
-                object@range.val <- value[End + 1L:object@shape.n]
-                End <- End + object@shape.n
-              }
-            } else if (type == "range") {
-              object@range.val <- value
-            } else if (type == "shape") {
-              object@shape.val <- value
-            } else if (type == "sd2") {
-              object@sd2  <- value
-            } else if (type == "nugget") {
-              object@nugget <- value
-            } else stop("bad 'type value")
-            
-            if (checkValidity) validObject(object)
-            return(object) 
-          }
-)
+# POUR EVITER LES CONFLITS AVEC gplab
+# setReplaceMethod("coef",
+#           signature = signature(object = "covTensorProduct", value = "numeric"),
+#           definition = function(object, type = "all", checkValidity = TRUE,
+#                                 ..., value) {
+#             
+#             ## not done during optims
+#             if (checkValidity) {
+#               expLength <- switch(type, 
+#                                   "all" = object@param.n + 1L + as.integer(object@nugget.flag),
+#                                   "all-nugget" = object@param.n + 1L,
+#                                   "all-sd2-nugget"= object@param.n,
+#                                   "range" = object@range.n, 
+#                                   "shape" = object@shape.n, 
+#                                   "sd2" = 1L,
+#                                   "nugget" = 1L)
+#               if (length(value) != expLength ) {
+#                 stop("'value' must have length ", expLength)
+#               }
+#             } 
+#             if (type == "all") {
+#               End <- 0L
+#               object@range.val <- value[End + 1L:object@range.n]
+#               End <- End + object@range.n
+#               if (length(object@shape.n) && object@shape.n > 0L) {
+#                 object@range.val <- value[End + 1L:object@shape.n]
+#                 End <- End + object@shape.n
+#               }
+#               object@sd2 <- value[End + 1L]
+#               End <- End + 1L
+#               if (object@nugget.flag) {
+#                 object@nugget.val <- value[End + 1L]
+#               }
+#             } else if (type == "all-nugget") {
+#               End <- 0L
+#               object@range.val <- value[End + 1L:object@range.n]
+#               End <- End + object@range.n
+#               if (length(object@shape.n) && object@shape.n > 0L) {
+#                 object@range.val <- value[End + 1L:object@shape.n]
+#                 End <- End + object@shape.n
+#               }
+#               object@sd2 <- value[End + 1L]
+#             } else if (type == "all-sd2-nugget") {
+#               End <- 0L
+#               object@range.val <- value[End + 1L:object@range.n]
+#               End <- End + object@range.n
+#               if (length(object@shape.n) && object@shape.n > 0L) {
+#                 object@range.val <- value[End + 1L:object@shape.n]
+#                 End <- End + object@shape.n
+#               }
+#             } else if (type == "range") {
+#               object@range.val <- value
+#             } else if (type == "shape") {
+#               object@shape.val <- value
+#             } else if (type == "sd2") {
+#               object@sd2  <- value
+#             } else if (type == "nugget") {
+#               object@nugget <- value
+#             } else stop("bad 'type value")
+#             
+#             if (checkValidity) validObject(object)
+#             return(object) 
+#           }
+# )
 
 setMethod("covParametersBounds", 
           signature = "covTensorProduct", 

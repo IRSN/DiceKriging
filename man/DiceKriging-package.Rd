@@ -2,7 +2,7 @@
 \alias{DiceKriging}
 \docType{package}
 
-\title{ Kriging methods for computer experiments}
+\title{ Kriging Methods for Computer Experiments}
 
 \description{
 Estimation, validation and prediction of kriging models.
@@ -12,8 +12,8 @@ Estimation, validation and prediction of kriging models.
 \tabular{ll}{
 Package: \tab DiceKriging\cr
 Type: \tab Package\cr
-Version: \tab 1.5.4\cr
-Date: \tab 2015-01\cr
+Version: \tab 1.5.5\cr
+Date: \tab 2015-04-23\cr
 License: \tab GPL-2 | GPL-3 \cr
 }
 }
