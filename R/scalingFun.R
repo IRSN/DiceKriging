@@ -8,10 +8,15 @@
 ##
 ##===============================================================
 
+#' @example plot(Vectorize(function(x)scalingFun1d(x,c(0,1),c(.5,.5))))
+#' @example plot(Vectorize(function(x)scalingFun1d(x,c(0,1),c(.5,.75))))
+#' @example plot(Vectorize(function(x)scalingFun1d(x,0,.5)))
 scalingFun1d <- function(x, knots, eta){
 
   n <- length(x)
   nKnots <- length(knots)
+
+  if (nKnots == 1) return(eta*(x-knots))
 
   if ( any(x < knots[1]-1E-6) | any(x > knots[nKnots]+1E-6) )
       stop("'x' values must be inside the knots\nknots =",paste(knots,collapse=","),"\nx = ",paste(x,collapse=","))
