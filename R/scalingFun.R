@@ -41,9 +41,7 @@ scalingFun1d <- function(x, knots, eta){
     if(length(ix_lower)>0) newscale[ix_lower]=eta[1]*(x[ix_lower]-knots[1])
 
     if(length(ix_upper)>0) {
-        print(ix_upper)
         y0=scalingFun1d.inside(knots[nKnots],knots, eta)
-        print(y0)
         newscale[ix_upper]=eta[nKnots]*(x[ix_upper]-knots[nKnots])+y0
     }
 
