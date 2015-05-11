@@ -19,8 +19,8 @@ scalingFun1d <- function(x, knots, eta){
     n <- length(x)
     nKnots <- length(knots)
 
-    if ( any(x < knots[1]-1E-6) | any(x > knots[nKnots]+1E-6) )
-        warning("'x' values should be inside the knots (otherwise using closest knot)\nknots =",paste(knots,collapse=","),"\nx = ",paste(x,collapse=","))
+    #if ( any(x < knots[1]-1E-6) | any(x > knots[nKnots]+1E-6) )
+    #    warning("'x' values should be inside the knots (otherwise using closest knot)\nknots =",paste(knots,collapse=","),"\nx = ",paste(x,collapse=","))
 
     ix_upper= which(x > knots[nKnots])
     ix_lower = which(x < knots[1])
