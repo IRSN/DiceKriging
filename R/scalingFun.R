@@ -50,6 +50,8 @@ scalingFun1d <- function(x, knots, eta){
 
 
 #' Do NOT support when x is outside bounds of knots...
+#' @perf x=runif(100); k=seq(0,1,,10);e=runif(10); scalingFun1d.inside.faster(x,k,e)
+#' @perf Rprof("scaling.prof", line.profiling=TRUE); x=runif(100); k=seq(0,1,,10);e=runif(10); for(i in 1:10000) scalingFun1d.inside(x,k,e); Rprof(NULL); summaryRprof("scaling.prof", lines = "show")
 scalingFun1d.inside <- function(x, knots, eta){
 
     n <- length(x)
@@ -60,29 +62,21 @@ scalingFun1d.inside <- function(x, knots, eta){
     if ( any(x < knots[1]) | any(x > knots[nKnots]) )
         stop("'x' values should be inside the knots (otherwise using closest knot)\nknots =",paste(knots,collapse=","),"\nx = ",paste(x,collapse=","))
 
-    xs <- sort(x, index.return = TRUE)
-    xsorted <- xs$x
-    ind <- xs$ix
+    if (length(x)>1){
+        xs <- sort(x, index.return = TRUE)
+        xsorted <- xs$x
+        ind <- xs$ix
+    } else{
+        xsorted=x
+        ind=1
+    }
 
-    ## BUG fix for versions > 1.2. 'rightmost.closed'
-    ## must be set to TRUE
-    inter <- findInterval(x = xsorted, vec = knots,
-                          rightmost.closed = TRUE)
-
-    inter <- factor(inter, levels = 1:(nKnots-1))
-
-    ## iCuts is of length nKnot
-    ## the first and last element of 'iCuts' are 0 and  n
-    iCuts <- as.numeric(tapply(xsorted, inter, length))
-    iCuts[is.na(iCuts)] <- 0
-    iCuts <- c(0, cumsum(iCuts))
     scale <- rep(0, n)
 
     ## cat("Calling C\n")
     res <- .C("Scale",
               n = as.integer(n),
               nKnots = as.integer(nKnots),
-              iCuts = as.integer(iCuts),
               x = as.double(xsorted),
               knots = as.double(knots),
               eta = as.double(eta),

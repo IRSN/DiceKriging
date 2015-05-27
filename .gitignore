@@ -4,3 +4,4 @@
 MD5
 src/*.o
 src/*.so
+*.prof
