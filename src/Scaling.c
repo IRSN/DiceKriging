@@ -48,7 +48,8 @@ void Scale(int *n,               // length of x
         etaR = eta[ell+1];
 
         // patch to avoid usage of icuts which is high CPU demanding
-        while (i < *n & x[i] <= knotR) { //for (i = icuts[ell]; i < icuts[ell+1]; i++) {
+        if (i < *n)
+        while (x[i] <= knotR) { //for (i = icuts[ell]; i < icuts[ell+1]; i++) {
 
             deltaL = x[i] - knotL;
             deltaR = knotR - x[i];
@@ -57,6 +58,8 @@ void Scale(int *n,               // length of x
             scale[ i ] = S + 0.5 * diffL * (etaL * (dKnot + deltaR) + etaR*deltaL);
 
             i ++;
+
+            if (i >= *n) break;
         }
 
         S += 0.5 * ( etaL + etaR ) * dKnot;
