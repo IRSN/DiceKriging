@@ -1,6 +1,6 @@
 Package: DiceKriging
 Title: Kriging methods for computer experiments
-Version: 1.5.43
+Version: 1.5.44
 Date: 2015-01
 Author: Olivier Roustant, David Ginsbourger, Yves Deville. Contributors: Clement Chevalier, Yann Richet.
 Maintainer: Yann Richet <yann.richet@irsn.fr>
