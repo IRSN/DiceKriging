@@ -1,12 +1,10 @@
 `logLikFun` <-
 function(param, model, envir=NULL) {
-	
   if (model@known.param=="Trend") {
     beta <- model@trend.coef
   } else {
     beta <- NULL
   }
-  
 	if (identical(model@case, "LLconcentration_beta_sigma2")) {
 		
 		model@covariance <- vect2covparam(model@covariance, param)
@@ -31,13 +29,12 @@ function(param, model, envir=NULL) {
 		}
 		
 	} else if (identical(model@case, "LLconcentration_beta")) {
-		
 		nparam <- length(param)
-    if (class(model@covariance) != "covAdditive0") {
+                if (class(model@covariance) != "covAdditive0") {
 		  model@covariance <- vect2covparam(model@covariance, param[1:(nparam-1)])
 		  model@covariance@sd2 <- param[nparam]
     } else {
-      model@covariance <- vect2covparam(model@covariance, param)
+       model@covariance <- vect2covparam(model@covariance, param)
     }
     
 # 		if (model@covariance@nugget.estim) {
@@ -50,7 +47,6 @@ function(param, model, envir=NULL) {
 	
 		C <- aux[[1]]
 		vn <- aux[[2]]
-
     T <- chol(C)
     x <- backsolve(t(T), model@y, upper.tri = FALSE)
     M <- backsolve(t(T), model@F, upper.tri = FALSE)
