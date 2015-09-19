@@ -14,8 +14,10 @@ scalingFun(X, knots, eta, plot=FALSE)
 \arguments{
   \item{X}{ an n*d matrix standing for a design of n experiments in d-dimensional space }
   \item{knots}{ a list of knots parametrizing the transformation. }
-  \item{eta}{ a list of coefficients parametrizing the d marginal transformations. Each element stands for a set of marginal density values at the knots defined above.}
-  \item{plot}{ if TRUE plots the image of the columns of X according to the corresponding marginal transformations.}
+  \item{eta}{a list of coefficients parametrizing the d marginal
+  transformations. Each element stands for a set of marginal density
+  values at the knots defined above.}
+\item{plot}{ if TRUE plots the image of the columns of X according to the corresponding marginal transformations.}
 }
 
 \value{

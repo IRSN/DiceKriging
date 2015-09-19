@@ -111,9 +111,9 @@ scalingFun <- function(X, knots, eta, plot = FALSE) {
     transX <- matrix(NA, nrow = NROW(X), ncol = NCOL(X))
     dimnames(transX) <- dimnames(X)
     X <- as.matrix(X)
-
     for (i in 1:d){
-        transX[ , i] <- scalingFun1d(x = X[ , i], knots = knots[[colnames(X)[i]]], eta = eta[[colnames(X)[i]]])
+       transX[ , i] <- scalingFun1d(x = X[ , i], knots = knots[[i]],
+                                    eta = eta[[i]])
     }
 
     if (plot) {
