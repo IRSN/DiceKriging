@@ -134,7 +134,7 @@
                 bestValue <- Inf
                 bestIndex <- NA
                 vecValue <- c()
-                for (i in 1:multistart){
+                for (i in seq(along=olist)){
                     currentValue <- fnscale * olist[[i]]$value
                     vecValue <- c(vecValue, currentValue)
                     if (currentValue < bestValue) {
