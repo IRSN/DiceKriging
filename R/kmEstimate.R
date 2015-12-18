@@ -92,12 +92,12 @@
                 cat("  - variance bounds : ", c(lower[lp], upper[lp]), "\n")
             }
             cat("  - best initial criterion value(s) : ", initList$value, "\n")
-            if (model@optim.method=="BFGS") cat("\n")
+            if (model@optim.method=="bfgs") cat("\n")
         } # end printing
 
         # optimization
 
-        if (model@optim.method=="BFGS") {
+        if (model@optim.method=="bfgs") {
            BFGSargs <- c("trace", "parscale", "ndeps", "maxit", "abstol", "reltol", "REPORT", "lnm", "factr", "pgtol")
             commonNames <- intersect(BFGSargs, names(control))
             controlChecked <- control[commonNames]
@@ -194,7 +194,6 @@
                               lower = lower, upper = upper,
                               control = control, model=model, envir=envir)
         }
-
         model@logLik <- as.numeric(o$value)
 
 

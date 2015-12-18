@@ -112,8 +112,14 @@
         }
 
         model@param.estim <- TRUE
+        ##
+        optim.method <- tolower(optim.method)
+        if(!(optim.method %in% c("bfgs", "gen"))) {
+           stop("'optim.method' must be either 'BFGS' or 'gen'.  Currently it is '",
+                optim.method, "'")
+        }
         model@optim.method <- optim.method
-
+        ##
         if ((length(lower) == 0) || (length(upper) == 0)) {
             bounds <- covParametersBounds(model@covariance, design)
             if (length(lower) == 0) lower <- bounds$lower
@@ -129,7 +135,7 @@
         model@upper <- as.numeric(upper)
         model@parinit <- as.numeric(parinit)
 
-        if (optim.method == "BFGS") {
+        if (optim.method == "bfgs") {
             if (length(control$pop.size) == 0) control$pop.size <- 20
             control$pop.size <- max(control$pop.size, multistart)
             if (identical(control$trace, FALSE)) control$trace <- 0
@@ -220,7 +226,7 @@
             model@penalty$value <- lambda
             model <- f(model, envir = envir.logLik)
         } else {
-            model <- f(model, envir = envir.logLik)
+           model <- f(model, envir = envir.logLik)
         }
 
         return(model)
