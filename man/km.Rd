@@ -23,15 +23,21 @@ km(formula=~1, design, response, covtype="matern5_2",
   \item{response}{ a vector (or 1-column matrix or data frame) containing the values of the 1-dimensional output given by the objective function at the \code{design} points. }
   \item{covtype}{ an optional character string specifying the covariance structure to be used, to be chosen between \code{"gauss"}, \code{"matern5_2"}, \code{"matern3_2"}, \code{"exp"} or \code{"powexp"}. See a full description of available covariance kernels in \code{\link{covTensorProduct-class}}. Default is \code{"matern5_2"}. See also the argument \code{kernel} that allows the user to build its own covariance structure.}
   \item{coef.trend,}{ (see below)}
-  \item{coef.cov,}{ (see below)}
+  \item{coef.cov}{ (see below)}
   \item{coef.var}{ optional vectors containing the values for the trend, covariance and variance parameters. For estimation, 4 cases are implemented: 1. (All unknown) If all are missing, all are estimated. 2. (All known) If all are provided, no estimation is performed; 3. (Known trend) If \code{coef.trend} is provided but at least one of \code{coef.cov} or \code{coef.var} is missing, then BOTH \code{coef.cov} and \code{coef.var} are estimated; 4. (Unknown trend) If \code{coef.cov} and \code{coef.var} are provided but \code{coef.trend} is missing, then \code{coef.trend} is estimated (GLS formula).}
    \item{nugget}{ an optional variance value standing for the homogeneous nugget effect.}
   \item{nugget.estim}{ an optional boolean indicating whether the nugget effect should be estimated. Note that this option does not concern the case of heterogeneous noisy observations (see \code{noise.var} below). If \code{nugget} is given, it is used as an initial value. Default is \code{FALSE}.}
   \item{noise.var}{ for noisy observations : an optional vector containing the noise variance at each observation. This is useful for stochastic simulators. Default is \code{NULL}.}
   \item{estim.method}{  a character string specifying the method by which unknown parameters are estimated. Default is \code{"MLE"} (Maximum Likelihood). At this stage, a beta version of leave-One-Out estimation (\code{estim.method="LOO"}) is also implemented for noise-free observations.}
   \item{penalty}{ (beta version) an optional list suitable for Penalized Maximum Likelihood Estimation. The list must contain the item \code{fun} indicating the penalty function, and the item \code{value} equal to the value of the penalty parameter. At this stage the only available \code{fun} is \code{"SCAD"}, and \code{covtype} must be \code{"gauss"}. Default is \code{NULL}, corresponding to (un-penalized) Maximum Likelihood Estimation.}
-  \item{optim.method}{ an optional character string indicating which optimization method is chosen for the likelihood maximization. \code{"BFGS"} is the \code{optim} quasi-Newton procedure of package \code{stats}, with the method "L-BFGS-B". \code{"gen"} is the \code{genoud} genetic algorithm (using derivatives) from package \code{rgenoud} (>= 5.3.3). }
-  \item{lower, }{ (see below) }
+  \item{optim.method}{ an optional character string indicating which
+    optimization method to choose for the likelihood
+    maximization. \code{"BFGS"} is the \code{optim} quasi-Newton
+    procedure of package \code{stats}, with the method
+    "L-BFGS-B". \code{"gen"} is the \code{genoud} genetic algorithm
+    (using derivatives) from package \code{rgenoud} (>= 5.3.3).  Lower
+    case forms also supported.}
+  \item{lower}{ (see below) }
   \item{upper}{ optional vectors containing the bounds of the correlation parameters for optimization. The default values are given by \code{\link{covParametersBounds}}. }
   \item{parinit}{ an optional vector containing the initial values for the variables to be optimized over. If no vector is given, an initial point is generated as follows. For method \code{"gen"}, the initial point is generated uniformly inside the hyper-rectangle domain defined by \code{lower} and \code{upper}. For method \code{"BFGS"}, some points (see \code{control} below) are generated uniformly in the domain. Then the best point with respect to the likelihood (or penalized likelihood, see \code{penalty}) criterion is chosen. }
   \item{multistart}{ an optional integer indicating the number of initial points from which running the BFGS optimizer. These points will be selected as the best \code{multistart} one(s) among those evaluated (see above \code{parinit}). The multiple optimizations will be performed in parallel provided that a parallel backend is registered (see package \code{foreach}).} 

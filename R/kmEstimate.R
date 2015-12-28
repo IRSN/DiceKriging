@@ -92,13 +92,13 @@
                 cat("  - variance bounds : ", c(lower[lp], upper[lp]), "\n")
             }
             cat("  - best initial criterion value(s) : ", initList$value, "\n")
-            if (model@optim.method=="BFGS") cat("\n")
+            if (model@optim.method=="bfgs") cat("\n")
         } # end printing
 
         # optimization
 
-        if (model@optim.method=="BFGS") {
-            BFGSargs <- c("trace", "parscale", "ndeps", "maxit", "abstol", "reltol", "REPORT", "lnm", "factr", "pgtol")
+        if (model@optim.method=="bfgs") {
+           BFGSargs <- c("trace", "parscale", "ndeps", "maxit", "abstol", "reltol", "REPORT", "lnm", "factr", "pgtol")
             commonNames <- intersect(BFGSargs, names(control))
             controlChecked <- control[commonNames]
             if (length(control$REPORT)==0) {
@@ -110,8 +110,7 @@
 
             # multistart in parallel with foreach
             multistart <- control$multistart
-
-            if (multistart==1){
+            if (multistart==1) {
                 model@parinit <- parinit <- as.numeric(parinit[, 1])
                 model@covariance <- initList$cov[[1]]
                 o <- optim(par = parinit, fn = fn, gr = gr,
@@ -120,16 +119,17 @@
                 model@control$convergence <- o$convergence
             } else {
                 # multistart with foreach
-                if (requireNamespace("foreach", quietly = TRUE)){
-                    olist <- foreach::"%dopar%"(foreach::foreach(i=1:multistart,
-                                                                 .errorhandling='remove'), {
-                                                                     model@covariance <- initList$cov[[i]]
-                                                                     optim(par = parinit[, i], fn = fn, gr = gr,
-                                                                           method = "L-BFGS-B", lower = lower, upper = upper,
-                                                                           control = controlChecked, hessian = FALSE, model, envir=envir)
+                if (requireNamespace("foreach", quietly = TRUE)) {
+                    olist <- foreach::"%dopar%"(foreach::foreach(i=seq(length=multistart),
+                                                                 .errorhandling='stop'), {
+                                                                    model@covariance <- initList$cov[[i]]
+                                                                    optim(par = parinit[, i], fn = fn, gr = gr,
+                                                                          method = "L-BFGS-B", lower = lower, upper = upper,
+                                                                          control = controlChecked, hessian = FALSE, model, envir=envir)
                                                                  })
+                    ## Note: if errorhandling drops the errors, the olist will be
+                    ## shorter.  I find it useful to have errors displayed.
                 }
-
                 # get the best result
                 bestValue <- Inf
                 bestIndex <- NA
@@ -142,8 +142,7 @@
                         bestValue <- currentValue
                         bestIndex <- i
                     }
-                } # end multistart
-
+                 } # end multistart
                 model@covariance <- initList$cov[[bestIndex]]
                 parinit <- parinit[, bestIndex]
                 model@parinit <- as.numeric(parinit)
@@ -195,11 +194,10 @@
                               lower = lower, upper = upper,
                               control = control, model=model, envir=envir)
         }
-
         model@logLik <- as.numeric(o$value)
 
 
-        if (model@method=="LOO"){
+        if (model@method=="LOO") {
 
             model@covariance <- vect2covparam(model@covariance, o$par)
 
