@@ -1,4 +1,6 @@
-#DiceKriging: Kriging methods for computer experiments#
+[![Build Status](https://travis-ci.org/IRSN/DiceKriging.png)](https://travis-ci.org/IRSN/DiceKriging)
+
+# DiceKriging: Kriging methods for computer experiments#
 
 This repository is a fork of regular DiceKriging sources (available at http://cran.r-project.org/web/packages/DiceKriging).
 It contains some fixes and supplement for testing purpose.
