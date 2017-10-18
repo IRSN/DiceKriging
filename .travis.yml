@@ -1,2 +1,10 @@
 language: r
-sudo: required
+r:
+  - oldrel
+  - release
+  - devel
+os:
+  - linux
+  - osx
+before_install:
+- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then brew update ; brew reinstall gcc48 --with-fortran; fi
