@@ -12,7 +12,7 @@ Description: Estimation, validation and prediction of kriging models.
         * add scaling derivatives to be used within DiceOptim/EGO (covStruct_Scaling.R, covStruct_Scaling_Affine.R)
         * big improvement of scaling code for cpu efficiency
 Depends: methods
-Suggests: rgenoud, foreach, doParallel, testthat
+Suggests: rgenoud, foreach, doParallel, testthat, numDeriv
 License: GPL-2 | GPL-3
 URL: http://dice.emse.fr/
 Packaged: 2017-10-01 06:25:18 UTC; richet

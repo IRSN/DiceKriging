@@ -1,9 +1,14 @@
 [![Build Status](https://travis-ci.org/IRSN/DiceKriging.png)](https://travis-ci.org/IRSN/DiceKriging)
 
-# DiceKriging: Kriging methods for computer experiments#
+# DiceKriging: Kriging methods for computer experiments
 
 This repository is a fork of regular DiceKriging sources (available at http://cran.r-project.org/web/packages/DiceKriging).
-It contains some fixes and supplement for testing purpose.
+It contains some fixes and supplement for testing purpose:
+
+ * control random seed for genoud loglik optimization (kmEstimate.R)
+ * allow arbitrary optim.method function to be passed (expected to work like optim)
+ * add scaling derivatives to be used within DiceOptim/EGO (covStruct_Scaling.R, covStruct_Scaling_Affine.R)
+ * big improvement of scaling code for cpu efficiency
 
 Installation
 ------------
