@@ -26,7 +26,7 @@ set.seed(12)
 # kriging model 1 : matern5_2 covariance structure, no trend, no nugget effect
 m2 <- km(design=design.fact, response=y,control=list(trace=FALSE),scaling=TRUE, knots = list(c(0,1),c(0,1),c(0,.5,1)))
 
-test_that.km(m2,trend.coef = 127.2252,covariance.sd2 = 85424.41)
+test_that.km(m2,trend.coef = 127.2252,covariance.sd2 = 85424.41, precision=1e-3)
 
 
 
