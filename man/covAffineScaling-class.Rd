@@ -9,6 +9,7 @@
 \alias{covParametersBounds,covAffineScaling-method}
 \alias{covparam2vect,covAffineScaling-method}
 \alias{vect2covparam,covAffineScaling-method}
+\alias{covVector.dx,covAffineScaling-method}
 \alias{inputnames,covAffineScaling-method}
 %\alias{inputnames<-,covAffineScaling,character-method}
 \alias{kernelname,covAffineScaling-method}
@@ -20,7 +21,7 @@
 \alias{summary,covAffineScaling-method}
 
 \title{Class "covAffineScaling" }
-\description{ Composition of isotropic kernels with coordinatewise 
+\description{ Composition of isotropic kernels with coordinatewise
 non-linear scaling obtained by integrating affine functions }
 
 \section{Objects from the Class}{
@@ -30,12 +31,12 @@ In 1-dimension, the covariance kernels are parameterized as in (Rasmussen, Willi
 Gauss \tab \code{ k(x,y) = exp(-1/2*(h/theta)^2) } \cr
 Exponential \tab \code{ k(x,y) = exp(-h/theta) } \cr
 Matern(3/2) \tab \code{ k(x,y) = (1+sqrt(3)*h/theta)*exp(-sqrt(3)*h/theta) } \cr
-Matern(5/2) \tab \code{ k(x,y) = (1+sqrt(5)*h/theta+(1/3)*5*(h/theta)^2)} \cr 
+Matern(5/2) \tab \code{ k(x,y) = (1+sqrt(5)*h/theta+(1/3)*5*(h/theta)^2)} \cr
 \tab \code{          *exp(-sqrt(5)*h/theta)} \cr
 Power-exponential \tab \code{ k(x,y) = exp(-(h/theta)^p) } \cr
 }
 
-Here, in every dimension, the corresponding one-dimensional stationary kernel \code{k(x,y)} is replaced by \code{k(f(x),f(y))}, where \code{f} is a continuous monotonic function indexed by 2 parameters (see the references for more detail). 
+Here, in every dimension, the corresponding one-dimensional stationary kernel \code{k(x,y)} is replaced by \code{k(f(x),f(y))}, where \code{f} is a continuous monotonic function indexed by 2 parameters (see the references for more detail).
 
 }
 
@@ -68,6 +69,7 @@ Class \code{"\linkS4class{covKernel}"}, directly.
     \item{covParametersBounds}{\code{signature(object = "covAffineScaling")}: ... }
     \item{covparam2vect}{\code{signature(object = "covAffineScaling")}: ... }
     \item{vect2covparam}{\code{signature(object = "covAffineScaling")}: ... }
+    \item{covVector.dx}{\code{signature(object = "covAffineScaling")}: ... }
     \item{inputnames}{\code{signature(x = "covAffineScaling")}: ... }
     \item{kernelname}{\code{signature(x = "covAffineScaling")}: ... }
     \item{ninput}{\code{signature(x = "covAffineScaling")}: ... }
@@ -81,7 +83,7 @@ Class \code{"\linkS4class{covKernel}"}, directly.
 \author{ O. Roustant, D. Ginsbourger}
 
 \references{
-	
+
 N.A.C. Cressie (1993), \emph{Statistics for spatial data}, Wiley series in probability and mathematical statistics.
 
 C.E. Rasmussen and C.K.I. Williams (2006), \emph{Gaussian Processes for Machine Learning}, the MIT Press, \url{http://www.GaussianProcess.org/gpml}

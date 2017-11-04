@@ -9,6 +9,7 @@
 \alias{covParametersBounds,covScaling-method}
 \alias{covparam2vect,covScaling-method}
 \alias{vect2covparam,covScaling-method}
+\alias{covVector.dx,covScaling-method}
 \alias{show,covScaling-method}
 \alias{inputnames,covScaling-method}
 \alias{kernelname,covScaling-method}
@@ -19,7 +20,7 @@
 \alias{summary,covScaling-method}
 
 \title{Class "covScaling" }
-\description{ Composition of isotropic kernels with coordinatewise 
+\description{ Composition of isotropic kernels with coordinatewise
 non-linear scaling obtained by integrating piecewise affine functions }
 
 \section{Objects from the Class}{
@@ -29,12 +30,12 @@ In 1-dimension, the covariance kernels are parameterized as in (Rasmussen, Willi
 Gauss \tab \code{ k(x,y) = exp(-1/2*(h/theta)^2) } \cr
 Exponential \tab \code{ k(x,y) = exp(-h/theta) } \cr
 Matern(3/2) \tab \code{ k(x,y) = (1+sqrt(3)*h/theta)*exp(-sqrt(3)*h/theta) } \cr
-Matern(5/2) \tab \code{ k(x,y) = (1+sqrt(5)*h/theta+(1/3)*5*(h/theta)^2)} \cr 
+Matern(5/2) \tab \code{ k(x,y) = (1+sqrt(5)*h/theta+(1/3)*5*(h/theta)^2)} \cr
 \tab \code{          *exp(-sqrt(5)*h/theta)} \cr
 Power-exponential \tab \code{ k(x,y) = exp(-(h/theta)^p) } \cr
 }
 
-Here, in every dimension, the corresponding one-dimensional stationary kernel \code{k(x,y)} is replaced by \code{k(f(x),f(y))}, where \code{f} is a continuous monotonic function indexed by a finite number of  parameters (see the references for more detail). 
+Here, in every dimension, the corresponding one-dimensional stationary kernel \code{k(x,y)} is replaced by \code{k(f(x),f(y))}, where \code{f} is a continuous monotonic function indexed by a finite number of  parameters (see the references for more detail).
 
 }
 
@@ -42,7 +43,7 @@ Here, in every dimension, the corresponding one-dimensional stationary kernel \c
   \describe{
      \item{\code{d}:}{Object of class \code{"integer"}. The spatial dimension. }
     \item{\code{knots}:}{Object of class \code{"list"}. The j-th element is a vector containing the knots for dimension j. }
-    \item{\code{eta}:}{Object of class \code{"list"}. In correspondance with knots, the j-th element is a vector containing the scaling coefficients (i.e. the derivatives of the scaling function at the knots) for dimension j.} 
+    \item{\code{eta}:}{Object of class \code{"list"}. In correspondance with knots, the j-th element is a vector containing the scaling coefficients (i.e. the derivatives of the scaling function at the knots) for dimension j.}
 	 \item{\code{name}:}{Object of class \code{"character"}. The covariance function name. To be chosen between \code{"gauss", "matern5_2", "matern3_2", "exp"}, and \code{"powexp"} }
 	 \item{\code{paramset.n}:}{Object of class \code{"integer"}. 1 for covariance depending only on the ranges parameters, 2 for "powexp" which also depends on exponent parameters. }
 	 \item{\code{var.names}:}{Object of class \code{"character"}. The variable names. }
@@ -66,6 +67,7 @@ Class \code{"\linkS4class{covKernel}"}, directly.
     \item{covParametersBounds}{\code{signature(object = "covScaling")}: ... }
     \item{covparam2vect}{\code{signature(object = "covScaling")}: ... }
     \item{vect2covparam}{\code{signature(object = "covScaling")}: ... }
+    \item{covVector.dx}{\code{signature(object = "covScaling")}: ... }
     \item{show}{\code{signature(object = "covScaling")}: ... }
     \item{inputnames}{\code{signature(x = "covAffineScaling")}: ... }
     \item{kernelname}{\code{signature(x = "covAffineScaling")}: ... }
@@ -76,9 +78,9 @@ Class \code{"\linkS4class{covKernel}"}, directly.
     \item{summary}{\code{signature(object = "covAffineScaling")}: ... }
 }
 }
-	
+
 \references{
-Y. Xiong, W. Chen, D. Apley, and X. Ding (2007), \emph{Int. J. Numer. Meth. Engng}, A non-stationary covariance-based Kriging method for metamodelling in engineering design. 
+Y. Xiong, W. Chen, D. Apley, and X. Ding (2007), \emph{Int. J. Numer. Meth. Engng}, A non-stationary covariance-based Kriging method for metamodelling in engineering design.
 }
 
 
