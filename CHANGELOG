@@ -1,4 +1,9 @@
-## DiceKriging 1.5.4
+## DiceKriging 1.5.5
+
+## change / DiceKriging 1.5.4
+  * Deletion of the beta version of the replacement method 'coef<-', in order to avoid conflicts with GPlab
+  * Correction of a NOTE in CRAN Package Check Results: Registration of S3 methods for 'logLik.km', 'plot.km', 'predict.km'
+  * Bug corrected about the usage of 'diag(vn)', 'diag(noise.var)' when the dimension is 1.
 
 ## change / DiceKriging 1.5.3
   * Implementation of a multistart option for the BFGS optimizer, allowing to perform several optimizations from different initial starting points.
