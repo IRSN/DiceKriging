@@ -3,7 +3,7 @@
 \alias{covTensorProduct-class}
 \alias{show,covTensorProduct-method}
 \alias{coef,covTensorProduct-method}
-\alias{coef<-,covTensorProduct,numeric-method}
+%\alias{coef<-,covTensorProduct,numeric-method}
 \alias{covMat1Mat2,covTensorProduct-method}
 \alias{covMatrix,covTensorProduct-method}
 \alias{covMatrixDerivative,covTensorProduct-method}
@@ -79,7 +79,7 @@ Power-exponential \tab \code{ k(x,y) = exp(-(h/theta)^p) } \cr
   \describe{
     \item{show}{\code{signature(x = "covTensorProduct")} Print covariance function. See \code{\link{show,km-method}}. }
     \item{coef}{\code{signature(x = "covTensorProduct")} Get the coefficients of the covariance function. }
-    \item{coef<-}{\code{signature(x = "covTensorProduct")} Set the coefficients of the covariance function. } 
+%    \item{coef<-}{\code{signature(x = "covTensorProduct")} Set the coefficients of the covariance function. } 
   }
 }
 

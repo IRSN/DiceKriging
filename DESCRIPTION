@@ -1,7 +1,7 @@
 Package: DiceKriging
-Title: Kriging methods for computer experiments
-Version: 1.5.44
-Date: 2015-01
+Title: Kriging Methods for Computer Experiments
+Version: 1.5.55
+Date: 2015-04-23
 Author: Olivier Roustant, David Ginsbourger, Yves Deville. Contributors: Clement Chevalier, Yann Richet.
 Maintainer: Yann Richet <yann.richet@irsn.fr>
 Description: Estimation, validation and prediction of kriging models.
@@ -10,11 +10,12 @@ Description: Estimation, validation and prediction of kriging models.
         * control random seed for genoud loglik optimization (kmEstimate.R)
         * allow arbitrary optim.method function to be passed (expected to work like optim)
         * add scaling derivatives to be used within DiceOptim/EGO (covStruct_Scaling.R, covStruct_Scaling_Affine.R)
+        * big improvement of scaling code for cpu efficiency
 Depends: methods
 Suggests: rgenoud, foreach, doParallel, testthat
 License: GPL-2 | GPL-3
 URL: http://dice.emse.fr/
-Packaged: 2015-01-05 14:37:31 UTC; roustant
+Packaged: 2015-04-24 06:25:18 UTC; richet
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2015-01-05 16:45:39
+Date/Publication: 2015-04-24 11:22:56
