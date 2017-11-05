@@ -32,7 +32,7 @@ Y. Xiong, W. Chen, D. Apley, and X. Ding (2007), \emph{Int. J. Numer. Meth. Engn
 knots <- c(0, 0.3, 0.8, 1); eta <- c(2, 0.4, 1.4, 1.1)
 nk <- length(knots)
 t <- seq(from = 0, to = 1, length = 200)
-f <- scalingFun1d(x = matrix(t), knots = list(knots), eta = list(eta))
+f <- scalingFun1d(x = matrix(t), knots = knots, eta = eta)
 
 ## for text positions only
 itext <- round(length(t) * 0.7)
