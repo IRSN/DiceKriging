@@ -3,8 +3,14 @@ r:
   - oldrel
   - release
   - devel
+r_packages:
+  - rgenoud
+  - foreach
+  - doParallel
+  - testthat
+  - numDeriv
 os:
   - linux
   - osx
 before_install:
-- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then brew update ; brew reinstall gcc48 --with-fortran; fi
+- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then brew update ; brew reinstall --force gcc48 --with-fortran; fi
