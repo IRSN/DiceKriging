@@ -3,7 +3,7 @@ r:
   - oldrel
   - release
   - devel
-sudo: required
+#sudo: required
 warnings_are_errors: true
 r_packages:
   - rgenoud
@@ -14,5 +14,5 @@ r_packages:
 os:
   - linux
   - osx
-before_install:
-- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
+#before_install:
+#- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
