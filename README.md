@@ -22,7 +22,7 @@ You can install the latest version of the code using the `devtools` R package.
 install.packages("devtools")
 
 library(devtools)
-install_github("DiceKriging", "yannrichet")
+install_github("DiceKriging", "IRSN")
 ```
 
 ![Analytics](https://ga-beacon.appspot.com/UA-109580-20/DiceKriging)
