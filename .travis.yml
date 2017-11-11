@@ -16,3 +16,7 @@ os:
   - osx
 #before_install:
 #- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
+r_github_packages:
+  - r-lib/covr
+after_success:
+  - Rscript -e 'covr::codecov()'
