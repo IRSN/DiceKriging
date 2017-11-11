@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/IRSN/DiceKriging.png)](https://travis-ci.org/IRSN/DiceKriging)
+[![codecov](https://codecov.io/gh/IRSN/DiceKriging/branch/master/graph/badge.svg)](https://codecov.io/gh/IRSN/DiceKriging)
+
 
 # DiceKriging: Kriging methods for computer experiments
 
