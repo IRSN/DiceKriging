@@ -1,6 +1,6 @@
 ## load dependencies
 library(testthat)
-library(codecov.R)
+library(covr)
 
 ## test package
-test_check('codecov.R')
+test_check('DiceKriging')
