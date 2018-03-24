@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/IRSN/DiceKriging.png)](https://travis-ci.org/IRSN/DiceKriging)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IRSN/DiceKriging?branch=master&svg=true)](https://ci.appveyor.com/project/IRSN/DiceKriging)
+Linux & MacOS: [![Build Status](https://travis-ci.org/IRSN/DiceKriging.png)](https://travis-ci.org/IRSN/DiceKriging)
+Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/IRSN/DiceKriging?branch=master&svg=true)](https://ci.appveyor.com/project/IRSN/DiceKriging)
+
 [![codecov](https://codecov.io/gh/IRSN/DiceKriging/branch/master/graph/badge.svg)](https://codecov.io/gh/IRSN/DiceKriging)
 
 # DiceKriging: Kriging methods for computer experiments
