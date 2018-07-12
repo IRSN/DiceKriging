@@ -44,9 +44,9 @@ artifacts:
     type: zip
     
 
-before_deploy:
-  - git tag -f "DiceKriging-latest"
-  - git push origin --delete "DiceKriging-latest"
+#before_deploy:
+#  - git tag -f "DiceKriging-latest"
+#  - git push origin --delete "DiceKriging-latest"
 deploy:
   provider: GitHub
   release: DiceKriging_latest-Windows
