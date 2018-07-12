@@ -30,9 +30,9 @@ before_install:
 after_success:
   - Rscript -e 'covr::codecov()'
   
-before_deploy:
-      - git tag -f "DiceKriging-latest"
-      - git push origin --delete "DiceKriging-latest"
+#before_deploy:
+#      - git tag -f "DiceKriging-latest"
+#      - git push origin --delete "DiceKriging-latest"
 deploy:
   provider: releases
   name: DiceKriging_latest-LinuxOSX
