@@ -9,7 +9,10 @@ install:
   ps: Bootstrap
 
 # Adapt as necessary starting from here
-
+branches:
+  only:
+    - master
+    
 build_script:
   - travis-tool.sh install_deps
 
