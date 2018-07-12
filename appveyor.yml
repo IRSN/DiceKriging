@@ -47,9 +47,11 @@ artifacts:
 #before_deploy:
 #  - git tag -f "DiceKriging-latest"
 #  - git push origin --delete "DiceKriging-latest"
+before_deploy:
+     - git tag "DiceKriging_$(date +\"%D %T\")"
 deploy:
   provider: GitHub
-  release: DiceKriging_latest-Windows
+  release: DiceKriging-Windows
   description: 'Windows .zip package complied by Appveyor'
   auth_token:
     secure:  DAGNQm9WOY/5YmstALy9O3oJ8UE9b0BRjHZtcy977Tp1pOTv5soBrnK2B6DQVetL
