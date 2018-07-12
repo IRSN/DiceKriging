@@ -12,6 +12,7 @@ r_packages:
   - testthat
   - numDeriv
   - covr
+  - git2r
 os:
   - linux
   - osx
