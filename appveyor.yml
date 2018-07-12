@@ -24,22 +24,22 @@ on_failure:
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
-    name: Logs
+    name: log
 
   - path: '*.Rcheck\**\*.out'
-    name: Logs
+    name: log
 
   - path: '*.Rcheck\**\*.fail'
-    name: Logs
+    name: log
 
   - path: '*.Rcheck\**\*.Rout'
-    name: Logs
+    name: log
 
   - path: '\*_*.tar.gz'
-    name: Bits
+    name: src
 
   - path: '\*_*.zip'
-    name: Bits
+    name: bin
     type: zip
     
 # Appveyor will push the artifacts it has saved to GitHub 'releases' tab
@@ -47,7 +47,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure:  DAGNQm9WOY/5YmstALy9O3oJ8UE9b0BRjHZtcy977Tp1pOTv5soBrnK2B6DQVetL
-  artifact: Bits
-  draft: true
+  artifact: bin
+  draft: false
   prerelease: true
 
