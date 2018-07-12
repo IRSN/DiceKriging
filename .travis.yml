@@ -18,12 +18,14 @@ r_packages:
 #cache: packages
 os:
   - linux
-  - osx:
-    brew_packages: libgit2
+  - osx
+    
 addons:
   apt:
     packages:
       - libssh2-1-dev
+before_install:
+  - brew install libgit2
 
 after_success:
   - Rscript -e 'covr::codecov()'
