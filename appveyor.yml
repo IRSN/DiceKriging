@@ -1,5 +1,3 @@
-# DO NOT CHANGE the "init" and "install" sections below
-
 # Download script file from GitHub
 init:
   ps: |
@@ -45,6 +43,8 @@ artifacts:
 # Appveyor will push the artifacts it has saved to GitHub 'releases' tab
 deploy:
   provider: GitHub
+  release: DiceKriging_latest-Windows-$(appveyor_build_version)
+  description: 'Windows .zip package complied by Appveyor'
   auth_token:
     secure:  DAGNQm9WOY/5YmstALy9O3oJ8UE9b0BRjHZtcy977Tp1pOTv5soBrnK2B6DQVetL
   artifact: bin
