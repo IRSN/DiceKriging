@@ -24,20 +24,17 @@ addons:
   apt:
     packages:
       - libssh2-1-dev
-#before_install:
-#  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
-#  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew install --force libgit2; fi
-#  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo apt-get -y install libgit2-dev; fi
-#  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo add-apt-repository -y ppa:cjwatson/launchpad; sudo apt-get -y update; sudo apt-get -y install libgit2-dev; fi
-  
+
 after_success:
   - Rscript -e 'covr::codecov()'
   
+before_deploy:
+      - git tag "DiceKriging-latest"
 deploy:
   provider: releases
-  name: DiceKriging_latest-Linux-OSX
+  name: DiceKriging_latest-LinuxOSX
   api_key:
     secure: "GAD1xvd6MajE8AasywvMuDApe73z0wDBsRwZ/V1QQgf4oyrbM17P63HuHd3gxVEwKXP3TqTaYKHqlOnPWsgm//FqIkj0Ai6TBVrxCOWrSkN5yxyNV3A49JfwUtpN/7hPK4K8jR04jKU/XqSMA6Qm5q6ykp314BhNTPkhhjUNark="
   file_glob: true
-  file: release/*.gz
+  file: DiceKriging*.gz
   skip_cleanup: true
