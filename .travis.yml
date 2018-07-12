@@ -14,7 +14,7 @@ r_packages:
   - numDeriv
   - covr
   - git2r
-cache: packages
+#cache: packages
 os:
   - linux
   - osx:
@@ -27,7 +27,8 @@ before_install:
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew install --force libgit2; fi
 #  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo apt-get -y install libgit2-dev; fi
-
+  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo add-apt-repository -y ppa:cjwatson/launchpad; sudo apt-get -y update; sudo apt-get -y install libgit2-dev; fi
+  
 after_success:
   - Rscript -e 'covr::codecov()'
   
