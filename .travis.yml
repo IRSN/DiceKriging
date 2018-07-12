@@ -16,7 +16,9 @@ r_packages:
 os:
   - linux
   - osx
-#before_install:
-#- if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
+before_install:
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew update ; brew reinstall --force gcc48 --with-fortran; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo apt-get -y install libgit2-dev; fi
+
 after_success:
   - Rscript -e 'covr::codecov()'
