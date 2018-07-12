@@ -40,3 +40,16 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+    type: zip
+    
+# Appveyor will push the artifacts it has saved to GitHub 'releases' tab
+deploy:
+  provider: GitHub
+  auth_token:
+    secure:  832d1187052edd72342defebb9bbc8fc6791f51f
+  artifact: Bits
+  draft: true
+  prerelease: true
+  on:
+    appveyor_repo_tag: true
+
