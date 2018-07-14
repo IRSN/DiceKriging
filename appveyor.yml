@@ -49,7 +49,7 @@ before_deploy:
      - git tag '$(VERSION_RELEASE)'
 deploy:
   provider: GitHub
-  release: DiceKriging-Windows
+  release: DiceKriging-windows
   auth_token:
     secure:  DAGNQm9WOY/5YmstALy9O3oJ8UE9b0BRjHZtcy977Tp1pOTv5soBrnK2B6DQVetL
   artifact: bin
