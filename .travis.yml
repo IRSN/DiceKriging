@@ -6,7 +6,7 @@ r:
 branches:
   only:
     master
-#sudo: required
+
 warnings_are_errors: true
 r_packages:
   - rgenoud
@@ -15,7 +15,8 @@ r_packages:
   - testthat
   - numDeriv
   - covr
-#cache: packages
+cache: packages
+
 os:
   - linux
   - osx
@@ -24,11 +25,12 @@ addons:
   apt:
     packages:
       - libssh2-1-dev
+      
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew install libgit2; fi
   
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - f [[ "$TRAVIS_R_VERSION" == "release" && ("$TRAVIS_OS_NAME" == "linux") ]]; then Rscript -e 'covr::codecov()'; fi
   
 before_deploy:
   - git tag "$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)" || true
@@ -42,5 +44,6 @@ deploy:
   file_glob: true
   file: DiceKriging*.t*gz
   skip_cleanup: true
+  overwrite: true
   on:
     r: release
