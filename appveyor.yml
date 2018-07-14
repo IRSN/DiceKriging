@@ -15,7 +15,7 @@ branches:
     
 build_script:
   - travis-tool.sh install_deps
-  - ps: $env:VERSION_RELEASE="$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)"
+  - ps: $env:VERSION_RELEASE="windows_$(date +%Y%m%d-%H%M)"
   - echo %VERSION_RELEASE%
 
 test_script:
@@ -49,7 +49,7 @@ before_deploy:
      - git tag '$(VERSION_RELEASE)'
 deploy:
   provider: GitHub
-  release: DiceKriging-windows
+  release: windows
   auth_token:
     secure:  DAGNQm9WOY/5YmstALy9O3oJ8UE9b0BRjHZtcy977Tp1pOTv5soBrnK2B6DQVetL
   artifact: bin
