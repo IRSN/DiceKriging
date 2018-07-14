@@ -15,7 +15,7 @@ branches:
     
 build_script:
   - travis-tool.sh install_deps
-  - ps: $env:VERSION_RELEASE="windows_$(date +%Y%m%d-%H%M)"
+  - ps: $env:VERSION_RELEASE="$(date +%Y%m%d-%H%M)"
   - echo %VERSION_RELEASE%
 
 test_script:
@@ -56,7 +56,6 @@ deploy:
   draft: false
   prerelease: false
   description: '$(VERSION_RELEASE)'
-  tag: $(VERSION_RELEASE)
   force_update: true
   on:
     branch:
