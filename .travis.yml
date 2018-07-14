@@ -31,8 +31,8 @@ after_success:
   - Rscript -e 'covr::codecov()'
   
 before_deploy:
-     - git tag "DiceKriging_$(date +\"%D %T\")"
-#      - git push origin --delete "DiceKriging-latest"
+   - git tag "$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)" || true
+
 deploy:
   provider: releases
   name: DiceKriging-LinuxOSX
