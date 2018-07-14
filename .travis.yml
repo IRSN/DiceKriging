@@ -27,6 +27,9 @@ addons:
       - libssh2-1-dev
       
 before_install:
+  - echo "$TRAVIS_OS_NAME"
+  - echo "$TRAVIS_R_VERSION"
+  - echo $PKG_TARBALL
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew install libgit2; fi
   
 after_success:
