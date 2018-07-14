@@ -28,12 +28,12 @@ addons:
       
 before_install:
   - echo "$TRAVIS_OS_NAME"
-  - echo "$TRAVIS_R_VERSION"
+  - echo "$TRAVIS_R_VERSION_STRING"
   - echo $PKG_TARBALL
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew install libgit2; fi
   
 after_success:
-  - if [[ "$TRAVIS_R_VERSION" == "release" && ("$TRAVIS_OS_NAME" == "linux") ]]; then Rscript -e 'covr::codecov()'; fi
+  - if [[ "$TRAVIS_R_VERSION_STRING" == "release" && ("$TRAVIS_OS_NAME" == "linux") ]]; then Rscript -e 'covr::codecov()'; fi
   
 before_deploy:
   - git tag "$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)" || true
@@ -48,5 +48,4 @@ deploy:
   file: DiceKriging*.t*gz
   skip_cleanup: true
   overwrite: true
-  on:
-    r: release
+  on: condition: "$TRAVIS_R_VERSION_STRING = release"
