@@ -15,6 +15,8 @@ branches:
     
 build_script:
   - travis-tool.sh install_deps
+  - ps: $env:VERSION_RELEASE="$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)"
+  - echo %VERSION_RELEASE%
 
 test_script:
   - travis-tool.sh run_tests
@@ -43,19 +45,17 @@ artifacts:
     name: bin
     type: zip
     
-
-#before_deploy:
-#  - git tag -f "DiceKriging-latest"
-#  - git push origin --delete "DiceKriging-latest"
 before_deploy:
-     - git tag "DiceKriging_$(date +\"%D %T\")"
+     - git tag '$(VERSION_RELEASE)'
 deploy:
   provider: GitHub
   release: DiceKriging-Windows
-  description: 'Windows .zip package complied by Appveyor'
   auth_token:
     secure:  DAGNQm9WOY/5YmstALy9O3oJ8UE9b0BRjHZtcy977Tp1pOTv5soBrnK2B6DQVetL
   artifact: bin
   draft: false
   prerelease: false
+  description: '$(VERSION_RELEASE)'
+  tag: $(VERSION_RELEASE)
+  force_update: true
 
