@@ -30,7 +30,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ; then sudo chown -R $(whoami) /usr/local ; brew install libgit2; fi
   
 after_success:
-  - f [[ "$TRAVIS_R_VERSION" == "release" && ("$TRAVIS_OS_NAME" == "linux") ]]; then Rscript -e 'covr::codecov()'; fi
+  - if [[ "$TRAVIS_R_VERSION" == "release" && ("$TRAVIS_OS_NAME" == "linux") ]]; then Rscript -e 'covr::codecov()'; fi
   
 before_deploy:
   - git tag "$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)" || true
