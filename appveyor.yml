@@ -46,7 +46,7 @@ artifacts:
     type: zip
     
 before_deploy:
-     - git tag '$(VERSION_RELEASE)'
+     - git tag %VERSION_RELEASE%
 deploy:
   provider: GitHub
   release: windows
