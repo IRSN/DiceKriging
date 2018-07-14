@@ -36,7 +36,7 @@ after_success:
   - if [[ "$TRAVIS_R_VERSION_STRING" == "release" && ("$TRAVIS_OS_NAME" == "linux") ]]; then Rscript -e 'covr::codecov()'; fi
   
 before_deploy:
-  - if [ "$TRAVIS_R_VERSION_STRING" == "release" ]; then git tag "$TRAVIS_OS_NAME_$(date +%Y%m%d-%H%M)"; fi
+  - if [ "$TRAVIS_R_VERSION_STRING" == "release" ]; then git tag "$TRAVIS_OS_NAME"_"$(date +%Y%m%d-%H%M)"; fi
   - if [[ "$TRAVIS_R_VERSION_STRING" == "release" && ("$TRAVIS_OS_NAME" == "osx") ]]; then R CMD INSTALL --build $PKG_TARBALL; fi
 
 deploy:
