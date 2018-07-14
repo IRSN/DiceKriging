@@ -55,7 +55,6 @@ deploy:
   artifact: bin
   draft: false
   prerelease: false
-  description: '$(VERSION_RELEASE)'
   force_update: true
   on:
     branch:
