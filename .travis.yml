@@ -35,7 +35,6 @@ before_deploy:
   - if [[ "$TRAVIS_R_VERSION" == "release" && ("$TRAVIS_OS_NAME" == "osx") ]]; then R CMD INSTALL --build $PKG_TARBALL; fi
   - echo $TRAVIS_R_VERSION
   - echo $TRAVIS_OS_NAME
-  - ls -la
 deploy:
   provider: releases
   name: "DiceKriging-$TRAVIS_OS_NAME"
