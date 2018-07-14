@@ -48,4 +48,6 @@ deploy:
   file: DiceKriging*.t*gz
   skip_cleanup: true
   overwrite: true
-  on: condition: "$TRAVIS_R_VERSION_STRING = release"
+  on: 
+    condition: 
+      "$TRAVIS_R_VERSION_STRING = release"
