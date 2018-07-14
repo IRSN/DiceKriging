@@ -33,6 +33,9 @@ after_success:
 before_deploy:
   - git tag "$(git log --date=iso  -1 | grep Date | sed -e 's/Date:\ *//' -e 's/\+.*//' -e 's/[- :]//g')-$(git log --format=%h --abbrev=8 -1)" || true
   - if [[ "$TRAVIS_R_VERSION" == "release" && ("$TRAVIS_OS_NAME" == "osx") ]]; then R CMD INSTALL --build $PKG_TARBALL; fi
+  - echo $TRAVIS_R_VERSION
+  - echo $TRAVIS_OS_NAME
+  - ls -la
 deploy:
   provider: releases
   name: "DiceKriging-$TRAVIS_OS_NAME"
@@ -41,3 +44,5 @@ deploy:
   file_glob: true
   file: DiceKriging*.t*gz
   skip_cleanup: true
+  on:
+    condition: "$TRAVIS_R_VERSION == release
