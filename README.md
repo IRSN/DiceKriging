@@ -16,14 +16,18 @@ It contains some fixes and supplement for testing purpose:
 Installation
 ------------
 
-You can install the latest version of the code using the `devtools` R package.
+You can install the latest version of the code:
 
+  * using the `devtools` R package:
 ```
 # Install devtools, if you haven't already.
 install.packages("devtools")
 
-library(devtools)
-install_github("DiceKriging", "IRSN")
+devtools::install_github("DiceKriging", "IRSN")
 ```
+  * using pre-built packages:
+    * Windows: https://github.com/IRSN/DiceKriging/releases/download/windows/DiceKriging_1.5.55.zip
+    * Linux: https://github.com/IRSN/DiceKriging/releases/download/linux/DiceKriging_1.5.55.tar.gz
+    * OSX: https://github.com/IRSN/DiceKriging/releases/download/osx/DiceKriging_1.5.55.tgz
 
 ![Analytics](https://ga-beacon.appspot.com/UA-109580-20/DiceKriging)
