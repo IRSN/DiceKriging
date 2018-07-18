@@ -12,6 +12,7 @@ install:
 branches:
   only:
     - master
+skip_tags: true
     
 build_script:
   - travis-tool.sh install_deps
@@ -59,7 +60,4 @@ deploy:
   on:
     branch:
       master
-    except:
-      - linux
-      - osx
 
