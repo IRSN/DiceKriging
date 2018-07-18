@@ -59,4 +59,7 @@ deploy:
   on:
     branch:
       master
+    except:
+      - linux
+      - osx
 
