@@ -1,3 +1,12 @@
+----
+
+This repository is no longer supported. It has been merged with the regular one from the original team of DiceKriging: https://github.com/DiceKrigingClub/DiceKriging , and all features are translated there.
+
+You can also access the website dedicated to DiceKriging: https://dicekrigingclub.github.io/www/
+
+----
+
+
 Linux & OSX [![Build Status](https://travis-ci.org/IRSN/DiceKriging.png)](https://travis-ci.org/IRSN/DiceKriging)
 Windows [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/DiceKrigingClub/DiceKriging-l4eun?branch=master&svg=true)](https://ci.appveyor.com/project/DiceKrigingClub/DiceKriging-l4eun)
 
